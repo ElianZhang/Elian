@@ -1,0 +1,23 @@
+PDO常用方法：
+PDO::query()主要用于有记录结果返回的操作（PDOStatement），特别是select操作。
+
+PDO::exec()主要是针对没有结果集合返回的操作。如insert,update等操作。返回影响行数。
+PDO::lastInsertId()返回上次插入操作最后一条ID，但要注意：如果用insert into tb(col1,col2) values(v1,v2),(v11,v22)..的方式一次插入多条记录，lastinsertid()返回的只是第一条(v1,v2)插入时的ID,而不是最后一条记录插入的记录ID。
+PDOStatement::fetch()是用来获取一条记录。配合while来遍历。
+PDOStatement::fetchAll()是获取所有记录集到一个中。
+PDOStatement::fetchcolumn([int column_indexnum])用于直接访问列，参数column_indexnum是该列在行中的从0开始索引值，但是，这个方法一次只能取得同一行的一列，只要执行一次，就跳到下一行。因此，用于直接访问某一列时较好用，但要遍历多列就用不上。
+PDOStatement::rowcount()适用于当用query("select ...")方法时，获取记录的条数。也可以用于预处理中。$stmt->rowcount();
+PDOStatement::columncount()适用于当用query("select ...")方法时，获取记录的列数。
+
+注解：
+1、选fetch还是fetchall？
+小记录集时，用fetchall效率高，减少从数据库检索次数，但对于大结果集，用fetchall则给系统带来很大负担。数据库要向WEB前端传输量太大反而效率低。
+2、fetch()或fetchall()有几个参数：
+mixed pdostatement::fetch([int fetch_style [,int cursor_orientation [,int cursor_offset]]])
+array pdostatement::fetchAll(int fetch_style)
+
+fetch_style参数:
+■$row=$rs->fetchAll(PDO::FETCH_BOTH); FETCH_BOTH是默认的，可省，返回关联和索引。
+■$row=$rs->fetchAll(PDO::FETCH_ASSOC); FETCH_ASSOC参数决定返回的只有关联数组。
+■$row=$rs->fetchAll(PDO::FETCH_NUM); 返回索引数组
+■$row=$rs->fetchAll(PDO::FETCH_OBJ); 如果fetch()则返回对象，如果是fetchall(),返回由对象组成的二维数组
