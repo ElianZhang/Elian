@@ -3,3 +3,7 @@ $dbh=newPDO('mysql:host=localhost;port=3306; dbname=test',$user,$pass,array(
 PDO::ATTR_PERSISTENT=>true
 ));
 ?>
+
+
+
+持久性链接PDO::ATTR_PERSISTENT=>true
