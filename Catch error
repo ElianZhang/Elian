@@ -1,0 +1,14 @@
+<?php
+try{
+$dbh=newPDO('mysql:host=localhost;dbname=test',$user,$pass);
+
+$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+$dbh->exec("SET CHARACTER SET utf8");
+$dbh=null; //断开连接
+}catch(PDOException$e){
+print"Error!:".$e->getMessage()."<br/>";
+die();
+}
+?>
+
