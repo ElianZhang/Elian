@@ -1,0 +1,16 @@
+<?php
+try{
+$dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+$dbh->beginTransaction();//开启事务
+$dbh->exec("insertintostaff(id,first,last)values(23,'Joe','Bloggs')");
+$dbh->exec("insertintosalarychange(id,amount,changedate)
+values(23,50000,NOW())");
+$dbh->commit();//提交事务
+
+}catch(Exception$e){
+$dbh->rollBack();//错误回滚
+echo"Failed:".$e->getMessage();
+}
+?>
+
