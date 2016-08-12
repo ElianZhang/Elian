@@ -1,0 +1,11 @@
+<?php
+$dbh->query($sql); 当$sql 中变量可以用$dbh->quote($params); //转义字符串的数据
+
+$sql = 'Select * from city where CountryCode ='.$dbh->quote($country);  
+foreach ($dbh->query($sql) as $row)   {    
+ print $row['Name'] . "/t";    
+ print $row['CountryCode'] . "/t";    
+ print $row['Population'] . "/n"; 
+} 
+?>
+
