@@ -1,0 +1,14 @@
+使用zend studio编写程序时，我们经常要做一些注释。
+zend studio为我们提供了行注释和块注释的快捷键ctrl+slash和ctrl+shift+slash，开始不明白什么是slash，搜了一下才发现，原来就是/，也就ctrl+/和ctrl+shift+/
+另外其它的非常有用的快捷键
+首先是编辑功能的快捷键
+1. Ctrl + D 如果你有选中，那么就直接复制粘贴你选中的部分，如果你没有选中则直接复制你光标所在的那一行，并且这种复制不进入系统的粘贴板内。
+2. Ctrl + E 清除一行
+3. Ctrl + Space 一般这个键都被输入法屏蔽掉了，它的功能是显示代码完成
+下面是代码收展的快捷键
+1. Ctrl + Shift + 1 收起所有非PHP部分
+2. Ctrl + Shift + 2 收起所有的类
+3. Ctrl + Shift + 3 收起所有的函数
+4. Ctrl + Shift + 4 收起所有的注释部分/* */
+5. Ctrl + Shift + E 展开所有收起部分
+6. Ctrl + Shift + C 收起所有展开的部分
