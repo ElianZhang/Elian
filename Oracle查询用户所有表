@@ -1,0 +1,46 @@
+Oracle查询用户所有表
+ 
+下面为您介绍的语句用于实现Oracle查询用户所有表，如果您对oracle
+查询方面感兴趣的话，不妨一看。 www.2cto.com  
+ 
+select * from all_tab_comments
+-- 查询所有用户的表,视图等
+ 
+select * from user_tab_comments  
+-- 查询本用户的表,视图等
+ 
+select * from all_col_comments
+ 
+--查询所有用户的表的列名和注释.
+ 
+select * from user_col_comments
+-- 查询本用户的表的列名和注释
+ 
+select * from all_tab_columns
+--查询所有用户的表的列名等信息(详细但是没有备注).
+ 
+select * from user_tab_columns
+--查询本用户的表的列名等信息(详细但是没有备注).
+ 
+--一般使用1:  www.2cto.com  
+select t.table_name,t.comments from user_tab_comments t
+ 
+--一般使用2:
+select r1, r2, r3, r5
+from (select a.table_name r1, a.column_name r2, a.comments r3
+          from user_col_comments a),
+       (select t.table_name r4, t.comments r5 from user_tab_comments t)
+where r4 = r1
+ 
+以上就是oracle查询用户所有表的语句介绍。
+ 
+如何在oracle中查询所有用户表的表名、主键名称、索引、外键等
+ 
+1、查找表的所有索引（包括索引名，类型，构成列）：select t.*,i.index_type from user_ind_columns t,user_indexes i where t.index_name = i.index_name and t.table_name = i.table_name and t.table_name = 要查询的表    
+2、查找表的主键（包括名称，构成列）：    select cu.* from user_cons_columns cu, user_constraints au where cu.constraint_name = au.constraint_name and au.constraint_type = 'P' and au.table_name = 要查询的表     
+ 
+3、查找表的唯一性约束（包括名称，构成列）：select column_name from user_cons_columns cu, user_constraints au where cu.constraint_name = au.constraint_name and au.constraint_type = 'U' and au.table_name = 要查询的表    
+4、查找表的外键（包括名称，引用表的表名和对应的键名，下面是分成多步查询）：  
+  
+select * from user_constraints c where c.constraint_type = 'R' and c.table_name = 要查询的表     查询外键约束的列名：select * from user_cons_columns cl where cl.constraint_name = 外键名称   查询引用表的键的列名：select * from user_cons_columns cl where cl.constraint_name = 外键引用表的键名     
+5、查询表的所有列及其属性    select t.*,c.COMMENTS from user_tab_columns t,user_col_comments c where t.table_name = c.table_name and t.column_name = c.column_name and t.table_name = 要查询的表 
